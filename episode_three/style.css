@@ -1,0 +1,50 @@
+body {
+    background-color: #303030;
+    color: #fff;
+  }
+#container {
+    width: 1000px;
+    margin: 0 auto;
+}
+.rectangle {
+    width: 960px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    flex: 0 0 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.square--alt {
+    flex: 0 0 50%;
+}
+.logo {
+    flex: 0 0 600px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 70px;
+}
+.clock {
+    flex: 1;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 70px;
+}
+.square--wrapper {
+    flex: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile1 {
+    width: 230px;
+    padding: 10px;
+    height: 142px;
+    background-color: #3095d3;
+    background-clip: content-box;
+}
