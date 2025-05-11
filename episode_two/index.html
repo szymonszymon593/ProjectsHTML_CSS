@@ -4,20 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Discover Brazil</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .three-columns {
+      display: flex;
+      gap: 0;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    nav {
+      width: 30%;
+      background-color: #e6f7ff;
+      padding: 10px;
+    }
+
+    main {
+      width: 40%;
+      background-color: #fff5e6;
+      padding: 10px;
+    }
+
+    aside {
+      width: 30%;
+      background-color: #f3f3f3;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header,
+    footer {
+      text-align: center;
+      background-color: #222;
+      color: white;
+      padding: 20px;
+    }
+
+    img {
+      max-width: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header style="text-align: center; background-color: #222; color: white; padding: 20px;">
+  <header>
     <h1>Discover Brazil</h1>
     <p>The land of sun, samba, and incredible nature 🌞</p>
   </header>
 
-  <!-- MAIN WRAPPER -->
-  <div style="width: 1000px; margin: 20px auto;">
+  <div class="three-columns">
 
-    <!-- NAVIGATION -->
-    <div style="display: inline-block; width: 30%; vertical-align: top; background-color: #e0f7fa; padding: 10px;">
+    <nav>
       <h2>Top Cities</h2>
       <ul>
         <li><a href="#">Rio de Janeiro</a></li>
@@ -26,25 +73,22 @@
         <li><a href="#">Brasília</a></li>
         <li><a href="#">Salvador</a></li>
       </ul>
-    </div>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <div style="display: inline-block; width: 40%; vertical-align: top; background-color: #fff3e0; padding: 10px;">
+    <main>
       <h2>Rio de Janeiro</h2>
       <p>
         Rio is one of Brazil’s most iconic cities. Known for Carnival, Christ the Redeemer, and vibrant beaches like Copacabana.
       </p>
-    </div>
+    </main>
 
-    <!-- SIDEBAR / IMAGE -->
-    <aside style="display: inline-block; width: 30%; vertical-align: top; background-color: #f1f8e9; padding: 10px;">
-      <img src="img/brazil-rio-banner.jpg" alt="Rio skyline" style="width: 100%;" />
+    <aside>
+      <img src="img/brazil-rio-banner.jpg" alt="Skyline of Rio de Janeiro at sunset" />
     </aside>
 
   </div>
 
-  <!-- FOOTER -->
-  <footer style="text-align: center; background-color: #222; color: white; padding: 20px;">
+  <footer>
     <p>&copy; 2025 Discover Brazil. Created by Szymon</p>
   </footer>
 
