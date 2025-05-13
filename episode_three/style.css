@@ -9,6 +9,12 @@
     color: white;
     text-align: center;
     gap: 20px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
 }
 
 .hero h1 {
@@ -25,3 +31,48 @@
     cursor: pointer;
     border-radius: 4px;
 }
+.cities {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .cities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .city-tile {
+    width: 230px;
+    height: 142px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s ease;
+  }
+  
+  .city-tile:hover {
+    transform: translateY(-5px);
+  }
+  .city-paris {
+    background-image: url('./img/paris.jpg');
+  }
+  
+  .city-newyork {
+    background-image: url('./img/newyork.jpg');
+  }
+  
+  .city-tokyo {
+    background-image: url('./img/tokyo.jpg');
+  }
+  
+  .city-london {
+    background-image: url('./img/london.jpg');
