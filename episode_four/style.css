@@ -1,0 +1,96 @@
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #BFFF00;
+    margin: 0;
+    font-family: "Parkinsans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+#logo {
+    width: 100%;
+    background-color: antiquewhite;
+    font-size: clamp(24px, 4vw, 36px);
+    text-transform: uppercase;
+    margin: 5px 0;
+    letter-spacing: 3px;
+    border-bottom: 2px solid pink;
+    text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#container {
+    max-width: 878px;
+    width: 100%;
+    margin: 1rem auto;
+    background-color: yellowgreen;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#toc {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+ol.chapters {
+    color: gray;
+}
+ol.chapters li > ul { 
+    list-style: none;
+    color: brown;
+}
+
+li.chapters > ul {
+    margin-bottom: 0.5rem;
+    color: orange;
+
+}
+ul.cool li {
+    color: purple;
+}
+ul.points li {
+    color: orange;
+    list-style-type: disc;
+}
+ol.authors {
+    color: blue;
+    text-transform: uppercase;
+}
+.span {
+    color: turquoise;
+}
+ul.cool2 li::before {
+    color: lime;
+    content: "☞ ";
+    margin-right: 5px;
+}
+ul.cool3 li::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    background-image: url('img/kangaroo.png');
+    background-size: cover;
+}
+@media (max-width: 900px) {
+body {
+    font-size: 16px;
+}
+
+}
+
+@media (max-width: 600px) {
+body {
+    font-size: 15px;
+}
+#toc {
+    padding: 1.2rem;
+}
+}
