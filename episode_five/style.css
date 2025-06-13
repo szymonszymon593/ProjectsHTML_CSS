@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    font-family: "Parkinsans", sans-serif;
+    font-weight: 400;
+    background-color: #2f3336;
+    color: #efefef;
+    font-size: 17px;
+    line-height: 1.6; /* poprawia czytelność */
+    word-wrap: break-word; /* zapobiega rozjeżdżaniu się tekstu */
+}
+h1.logo {
+    font-size: 44px;
+    font-weight: 700;
+    color: #ddd;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+nav {
+    background-color: #1c74b2;
+    text-align: center;
+}
+.menu{
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+}
+.menu > li {
+    display: flex;
+    justify-content: center;   /* <-- TO dodaje poziome centrowanie */
+    align-items: center;       /* <-- pionowe centrowanie */
+    padding: 0 20px;
+    height: 60px;
+    border-right: 1px dashed #0a2b42;
+}
+.menu > li:first-child {
+    border-left: 1px dashed #0a2b42;
+}
+.menu a,
+.menu a:visited,
+.menu a:hover,
+.menu a:active {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+}
+.categories {
+    max-width: 950px;
+    width: 100%;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    padding: 0; 
+}
+h1 {
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 400;
+    color: #39a5f1;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.categories .author {
+    display: inline-block;
+    margin: 20px 10px 0 10px;
+    vertical-align: top;
+    text-align: center;
+  }
+  
+.author img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+.author a {
+    opacity: 0.8;
+}
+.author a:hover {
+    opacity: 1;
+}
+.entries {
+    max-width: 950px;
+    width: 100%;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    padding: 10px 0 80px 0; 
+}
+.newest {
+    background-color: #191d21;
+}
+.entry {
+    display: flex;
+    align-items: flex-start; /* wyrównanie do góry */
+    background: #3f5165;
+    padding: 1.5rem;
+    border-radius: 10px;
+    gap: 1.5rem;
+    margin: 0.3rem;
+  }
+  
+  .entryimg img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block; /* 🔑 KLUCZOWE dla wyrównania */
+  }
+  
+  .entrytxt {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* wyrównuje środek tekstu z obrazkiem */
+    align-items: flex-start;
+    margin-top: -9px;
+  }
+  
+/* media */
+
+@media (max-width: 768px) {
+    body {
+      
+    }
+    .menu {
+        font-size: 11px;
+        padding: 5px;
+        gap: 0.1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .categories {
+        text-align: center;
+    }
+
+    .categories .author {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .author img {
+        width: 70%;
+    }
+    .entry {
+          display: flex;
+
+    }
+      
+    .entrytxt {
+          width: 70%;
+    }
+    .entryimg img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 5px;
+        display: block; /* 🔑 KLUCZOWE dla wyrównania */
+      }
+}
