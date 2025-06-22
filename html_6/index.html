@@ -18,17 +18,77 @@
 
   <main>
     <article>
-        <form action="" method="post">
-            <fieldset>
-              <legend> Rodzaj nadwozia </legend>
-              <div><label><input type="radio" value="1" name="nadwozie" checked> Hatchback </label></div>
-              <div><label><input type="radio" value="2" name="nadwozie"> Kabriolet </label></div>
-              <div><label><input type="radio" value="3" name="nadwozie"> Kombi </label></div>
-            </fieldset>
-            
-        </form> 
+        <form action="file.php" method="post">
+            <div class="row">
+              <fieldset>
+                <legend> Rodzaj nadwozia </legend>
+                <div><label><input type="radio" value="1" name="nadwozie" checked> Hatchback </label></div>
+                <div><label><input type="radio" value="2" name="nadwozie"> Kabriolet </label></div>
+                <div><label><input type="radio" value="3" name="nadwozie"> Kombi </label></div>
+              </fieldset>
+              <!-- 
+              "name" groups radio buttons so only one can be selected.
+              <fieldset> semantically groups related inputs.
+              <legend> is the title of the group.
+              Radio buttons with the same "name" form a single-choice group.
+              "checked" marks an option by default.
+              -->
+            </div>
+            <div class="row">
+              <label for="silnik">Rodzaj silnika</label>
+              <select id="silnik" name="silnik">
+                <option value="w">wysokoprężny</option>
+                <option value="b" selected>benzynowy</option>
+                <option value="e">elektryczny</option>
+                <option value="h">hybrydowy</option>
+              </select>
+            </div>
+            <div class="row">
+              <fieldset class="equipment">
+                <legend> Wyposażenie samochodu </legend>
+                  <div><label><input type="checkbox" name="eq[]" value="1" disabled checked> klimatyzacja </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="2" disabled checked> systemy: ESP i ABS </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="3" > tapicerka skórzana </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="4" > tempomat </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="5" > tylny spojler dachowy </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="6" > radio z bluetooth </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="7" > reflektory przeciwmgłowe </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="8" > przyciemniane tylne szyby </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="9" > czujniki parkowania </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="10" > podgrzewane fotele </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="11" > składane lusterka </label></div>
+                  <div><label><input type="checkbox" name="eq[]" value="12" > światła LED do jazdy dziennej </label></div>
+              </fieldset>
+            </div>
+            <div class="row">
+              <label for="tree"> Jakie choinki zapachowe? </label>
+              <div style="margin-top: 10px;">
+                <select id="tree" name="tree[]" multiple size="3">
+                  <option value="k">kokosowa</option>
+                  <option value="c" selected>cytrynowa</option>
+                  <option value="t">truskawa</option>
+                  <option value="b">brzoskwiniowa</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <label> Imię <input type="text" name="imie" placeholder="Jak masz na imię?"></label>
+              <label> Hasło <input type="password" name="haslo"></label>
+              <label> Szukaj <input type="search" name="fraza"></label>
+            </div>
+            <div class="row">
+              <label> Ile kluczyków <input type="number" step="0.1" min="0"></label>
+            </div>
+            <div class="row">
+              <button type="submit">Zamawiam! (submit)</button> <!-- This is a submit button. It will submit a form if inside one. -->
+              <button type="button">Zamawiam! (button)</button> <!-- This is a regular button. It does nothing unless you add JavaScript. -->
+              <button>Zamawiam! (no type, acts like submit in a form)</button> <!-- No type specified. Default type for <button> is "submit" in forms. -->
+              <button type="button">Zamawiam! (button again)</button> <!-- Repeating type="button" to show that it's safe and does nothing on its own. -->
+              <button type="reset">Zamawiam! (reset)</button> <!-- This is a reset button. It resets all form fields (only works inside a form). -->
+                      <!-- type="button" blocks submitting-->
+            </div>   
+        </form>
     </article>
   </main>
-
 </body>
 </html>
