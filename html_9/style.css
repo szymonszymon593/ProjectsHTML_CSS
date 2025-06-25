@@ -1,0 +1,79 @@
+body {
+    background-color: rgb(34, 36, 35);
+    font-family: "Overlock", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+}
+.container {
+    margin: 0 auto;
+    width: 800px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+header {
+    background-color: pink;
+}
+main {
+    height: 180px;
+    min-height: 180px;
+    display: flex;
+    gap: 10px;
+}
+main > .col1 {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    flex-basis: 25%;
+    height: 100%;
+}
+main > .col1 > div {
+    background-color: greenyellow;
+    flex: 1;
+}
+main > .col2 {
+    background-color: plum;
+    flex-basis: 25%;
+}
+main > .col3 {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    flex-basis: 50%;
+    height: 100%;
+}
+.yellow {
+    background-color: yellow;
+    flex: 1;
+}
+.turquoise {
+    background-color: turquoise;
+    flex: 1;
+}
+aside {
+    display: flex;
+    gap: 10px;
+}
+aside > .col1 {
+    flex-basis: 85%;
+    background-color: sandybrown;
+}
+aside > .col2 {
+    flex-basis: 15%;
+    background-color: sandybrown;
+}
+.row {
+    display: flex;
+    gap: 10px;
+}
+nav {
+    flex-basis: 30%;
+    background-color: skyblue;
+}
+footer {
+    flex-basis: 70%;
+    background-color: skyblue;
+}
+
