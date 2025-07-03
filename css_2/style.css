@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box; /* it does not include gaps in the flexbox tho' */
+}
+body {
+    background: hsl(0, 0%, 44%);
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: beige;
+    font-size: 30px;
+    margin: 0;
+}
+.banner {
+    padding: 10px;
+    background-color: lightgreen;
+}
+.logo {
+    width: 1200px;
+    padding: 10px 10px;
+    margin: auto;
+    font-weight: 700;
+    font-style: italic;
+    color: #444444;
+}
+.logo:hover {
+    text-transform: uppercase;
+}
+.container {
+    width: 1000px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* align-items: center; */
+}
+nav {
+    width: 100%;
+    padding: 10px 20px;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+nav > div {
+    font-size: 20px;
+    text-align: center;
+    border-right: 4px dotted lightgreen;;
+    padding:  0 10px;
+    font-weight: 700;
+}
+nav > div:first-child {
+    border-left: 4px dotted lightgreen;;
+}
+nav > div:hover {
+    background-color: lightgreen;
+    transition: background-color 0.3s ease
+}
+.topbar {
+    color: lightgreen;
+    font-weight: 700;
+}
+.wrapper-1 {
+    display: flex;
+    gap: 10px;
+    height: 200px;
+}
+aside {
+    background-color: lightgreen;
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center; /* poziomo */
+    align-items: center;
+}
+main {
+    background-color: lightseagreen;
+    flex: 1 0 70%;
+    font-size: 20px;
+    background-color: #4545454f;
+}
+footer {
+    background-color: lightgreen;
+}
