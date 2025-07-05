@@ -1,0 +1,127 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+    background-color: #646262;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    font-size: 18px;
+    margin: 0;
+}
+.header {
+    padding: 3px 0 10px 0;
+}
+.logo {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;    
+    gap: 10px;   
+    font-size: 60px;
+}
+nav {
+    background-color: #c34f4f;
+    text-align: center;
+    font-size: 22px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+ol {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 1100px;
+    margin: 0 auto;
+}
+ol a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+ol > li {
+    flex: 1 0 10%;
+    text-align: center;
+    justify-content: center;
+    border-right: 2px dotted rgb(254, 71, 71);
+    padding: 10px 0;
+}
+ol > li:first-child {
+    border-left: 2px dotted rgb(254, 71, 71);
+}
+ol > li:hover {
+    background-color: #cf6969;
+}
+ol > li:hover > a {
+    color: rgb(136, 33, 33);
+}
+ol > li > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+    height: 0px;
+}
+ol > li > ul > li {
+    background-color: #cf6969;
+    position: relative;
+    z-index: 1000;
+    border-top: 2px dotted rgb(254, 71, 71);
+}
+ol > li > ul > li:hover {
+    background-color: #c34f4f;
+}
+ol > li > ul > li:hover > a {
+    color: #451717;
+}
+ol > li:hover > ul {
+    display: block;
+}
+main {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 15px;
+}
+.socials {
+    /* background-color: #5c5b5b; */
+}
+.icons {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    font-size: 45px;
+}
+.icons > div {
+    flex: 1 0 20%;
+    text-align: center;
+    padding: 10px;
+    color: #c34f4f;
+}
+.fa-facebook-f:hover {
+    color: #1877F2;
+}
+.fa-tiktok:hover {
+    color: white;
+    text-shadow: 1px 1px 0 #FE2C55, 0 2px 2px #25F4EE;
+}
+.fa-x-twitter:hover {
+    color: white;
+}
+.fa-instagram:hover {
+    transform: scale(1);
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.footer {
+    background-color: #c34f4f;
+    text-align: center;
+    padding: 30px;
+}
