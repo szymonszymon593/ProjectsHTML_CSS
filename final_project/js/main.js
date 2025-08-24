@@ -15,57 +15,23 @@ window.onbeforeunload = function () {
 
 window.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
-  const main = document.querySelector("main");
 /*   const deco2 = document.querySelectorAll(".deco2"); */
 
   requestAnimationFrame(() => {
     nav?.classList.add("visible");
-    main?.classList.add("visible");
-
 /*     deco2.forEach(el => el.classList.add("visible")); */
   });
 });
+const toggle = document.querySelector('.menu-small');
+const panel = document.querySelector('.menu-small-panel');
 
-/* ===================== */
-/*  wrapper screen and main 
-let faded = false;
-let scrolledToTop = false;
-
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const wrapper = document.querySelector('.wrapper');
-
-  if (scrollY > 200 && !faded) {
-    faded = true;
-    wrapper.style.transition = 'opacity 0.5s ease';
-    wrapper.style.opacity = '0';
-    wrapper.style.pointerEvents = 'none';
-
-    wrapper.addEventListener('transitionend', function handleTransitionEnd(e) {
-      if (e.propertyName === 'opacity') {
-        wrapper.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'auto' });
-
-        // Po zniknięciu wrappera, zacznij nasłuch scrolla do samej góry
-        const checkScrollToTop = () => {
-          if (window.scrollY === 0 && !scrolledToTop) {
-            scrolledToTop = true;
-            document.querySelector('main').classList.add('visible');
-            document.querySelector('nav').classList.add('visible'); 
-            window.removeEventListener('scroll', checkScrollToTop);
-          }
-        };
-
-        window.addEventListener('scroll', checkScrollToTop);
-        // Jeśli już jesteśmy na górze, aktywuj od razu
-        checkScrollToTop();
-
-        wrapper.removeEventListener('transitionend', handleTransitionEnd);
-      }
-    });
-  }
+toggle.addEventListener('click', () => {
+  panel.classList.toggle('active');
 });
 
-
-
- */
+// Reset przy przejściu na duży ekran
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1110) {
+    panel.classList.remove('active');
+  }
+});

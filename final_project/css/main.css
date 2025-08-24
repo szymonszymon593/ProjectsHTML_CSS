@@ -12,7 +12,7 @@ body, html {
 }
 nav {
   width: 100vw;
-  background-color: greenyellow;
+  background-color: rgb(173, 255, 47, 0.95);
   position: fixed;
   top: 0;       /* odległość od górnej krawędzi ekranu */
   left: 0;      /* od lewej krawędzi */
@@ -48,94 +48,43 @@ a:visited {
   color: inherit;
   text-decoration: none;
 }
-/* .deco {
-  background-color: rgb(255, 247, 0);
+.menu-small {
+  all: unset;
+  display: none;
+  padding: 5px 60px;
+  font-size: 20px;
+  margin-right: auto;
+  align-items: center;    
 }
-.deco2 {
-  background-color: aqua;
-  transform: translateY(100px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-  margin-top: 34.5px;
-  width: 60vw;
-} */
-main {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-  width: 80vw;
-/*   background-color: rgb(255, 0, 183); */
-  padding: 1vw;
+.menu-small-panel {
+  display: none;
+  background-color: antiquewhite;
 }
+
 .visible {
   opacity: 1;
   transform: translateY(0);
 /*   pointer-events: auto; */
 }
-.container {
-  margin-top: 34.5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+
+.container-main {
+  margin-top: 34px;
+  padding-top: 20px;
 }
-
-
-
-
-/* .wrapper {
-  height: 150vh;
-  display: flex;
-  justify-content: center;
-  padding-top: 40vh;
-  overflow: hidden;
-/*   background-color: blueviolet; 
+.scroll {
+  height: 200vh;
+  border: 1px red solid;
 }
-.tekst {
-  font-size: 200px;
-  text-transform: uppercase;
-  background: url('../img/bck.png') center center fixed;
-  background-size: cover;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  z-index: 10;
-  overflow: hidden;
-  font-weight: 700;
-}
-.scrollto {
-  font-size: 30px;
-  text-transform: lowercase;
-  font-weight: 200;
-} */
-
-@media (max-width: 1109px) {
+@media (max-width: 1110px) {
   /* Styl obowiązuje do 600px włącznie */
-  nav {
-    width: 100vw;
-    background-color: greenyellow;
-    position: fixed;
-    top: 0;       /* odległość od górnej krawędzi ekranu */
-    left: 0;      /* od lewej krawędzi */
-    z-index: 100; /* upewnij się, że jest na wierzchu */
-    transform: translateY(-100%);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-    height: 34.5px;
-    display: flex;
-    justify-content: center; /* wyrównanie w poziomie (X) */
-    align-items: center;
-  }
   nav > ul {
-    all: unset;
-    display: flex;
-    list-style: none;
-    gap: 1vw;
-    font-size: 15px;
-    width: 95vw;
-    margin-left: 0;
-    height: 34.5;
-    align-items: center;
+    display: none;
   }
-  main {
-    width: 95vw;
+  .menu-small {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .menu-small-panel.active {
+    display: block;
   }
 }
