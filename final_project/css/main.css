@@ -12,33 +12,35 @@ body, html {
 }
 nav {
   width: 100vw;
-  background-color: rgb(173, 255, 47, 0.95);
+  background-color: rgba(153, 255, 0, 0.8);
+    backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: fixed;
   top: 0;       /* odległość od górnej krawędzi ekranu */
   left: 0;      /* od lewej krawędzi */
   z-index: 100; /* upewnij się, że jest na wierzchu */
   transform: translateY(-100%);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: /* opacity 0.7s ease,  */transform 0.7s ease;
   height: 34.5px;
 }
-nav > ul {
+.menu-big {
   all: unset;
   display: flex;
   list-style: none;
   padding: 5px 0;
   gap: 2vw;
   font-size: 20px;
-  width: 60vw;
-  margin-left: 15%;
+  width: 60%;
+  margin-left: 10%;
   margin-right: auto;
   align-items: center;    
 }
 nav > ul > li {
-/*   border: 1px solid red; */
+  transition: transform 0.2s ease;
 }
 nav > ul > li:hover, 
 nav > ul > li:focus {
-  color: rgb(46, 46, 46);
+  transform: scale(1.1);
 }
 a,
 a:hover,
@@ -53,12 +55,52 @@ a:visited {
   display: none;
   padding: 5px 60px;
   font-size: 20px;
-  margin-right: auto;
-  align-items: center;    
+  margin-left: auto;
+  cursor: pointer;
+/*   border: 1px red solid;   */
+ transition: transform 0.2s ease;
+}
+.menu-small:hover,
+.menu-small:focus {
+  transform: scale(1.1);
 }
 .menu-small-panel {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100vw;
+  list-style: none;
+  margin-top: 34.5px;
+  font-size: 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: padding 0.3s ease-out;
+  background: rgba(255, 255, 255);
+  padding: 20vw;;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.menu-small-panel.active > li > span {
+  display: inline-block;          /* wymagane, żeby transform działał */
+  transform-origin: left center;  /* powiększa od lewej strony */
+  transition: transform 0.2s ease;
+}
+.menu-small-panel.active > li:hover > span, 
+.menu-small-panel.active > li:focus > span {
+  transform: scale(1.1);
+}
+
+.search-form input[type="search"] {
   display: none;
-  background-color: antiquewhite;
+}
+.search-form input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-form input[type="search"]::placeholder {
+  color: rgb(60, 58, 58);
 }
 
 .visible {
@@ -66,25 +108,127 @@ a:visited {
   transform: translateY(0);
 /*   pointer-events: auto; */
 }
+.small-default {
+  display: flex;           /* dla łatwego wyśrodkowania inputa */
+  position: absolute;      /* pozycjonowanie względem nav */
+  top: 0;
+  left: 0;               /* to samo co margin-left w .menu-big */            /* to samo co width w .menu-big */
+  height: 100%;
+  z-index: 400;            /* nad innymi elementami */
+  padding: 0;
+  width: 100%;
+}
 
 .container-main {
-  margin-top: 34px;
+  margin-top: 30px;
   padding-top: 20px;
 }
+.container-main img {
+  max-width: 100%;
+  height: auto;
+  border: 1px greenyellow solid;
+}
+
 .scroll {
   height: 200vh;
   border: 1px red solid;
 }
+.small-all {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.3s ease, backdrop-filter 0.3s ease, -webkit-backdrop-filter 0.3s ease;
+}
+.overlay.active {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  pointer-events: auto;
+  z-index: 10;
+}
+.search-wrapper {
+  display: flex;
+  position: absolute;
+  top: 34.5px;
+  margin-left: 10%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.search-wrapper.active {
+  max-height: 1500px;
+  height: auto;
+  opacity: 1;
+  transition: 0.2s ease;
+  background-color: white;
+}
+.search-results {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 50vw;
+  list-style: none;
+}
+.search-results > li {
+  padding-right: 2px;
+  padding-left: 50px;
+  background-color: rgba(153, 255, 0);
+}
 @media (max-width: 1110px) {
   /* Styl obowiązuje do 600px włącznie */
-  nav > ul {
+  .menu-big {
     display: none;
   }
   .menu-small {
     display: flex;
-    justify-content: flex-end;
   }
   .menu-small-panel.active {
+    display: flex;
+    flex-direction: column;
+    max-height: 1000px; /* wystarczająca wysokość na całą listę */
+    height: auto;
+    padding: 20vw;
+    padding-right: 0;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  .search-form {
+    display: flex;           /* dla łatwego wyśrodkowania inputa */
+    align-items: center;
+    position: absolute;      /* pozycjonowanie względem nav */
+    top: 0;
+    left: 10%;               /* to samo co margin-left w .menu-big */            /* to samo co width w .menu-big */
+    height: 100%;
+    z-index: 200;            /* nad innymi elementami */
+    padding: 5px 0;
+    font-style: italic;
+    font-size: 18px;
+  }
+  .search-form input[type="search"] {
+    all: unset;
     display: block;
+    width: 50vw;
+    padding: 4px;
+    border-radius: 4px;
+    color: rgb(0, 0, 0);
+    caret-color: black; /* kolor kursora */
+    cursor: text;
+  }
+  .small-all {
+    display: flex;
   }
 }
