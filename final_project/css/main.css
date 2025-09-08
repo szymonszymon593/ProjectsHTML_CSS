@@ -77,7 +77,7 @@ a:visited {
   overflow: hidden;
   transition: padding 0.3s ease-out;
   background: rgba(255, 255, 255);
-  padding: 20vw;;
+  padding: 20vw;
   padding-right: 0;
   padding-top: 0;
   padding-bottom: 0;
@@ -159,33 +159,45 @@ a:visited {
 .search-wrapper {
   display: flex;
   position: absolute;
-  top: 34.5px;
-  margin-left: 10%;
   max-height: 0;
-  opacity: 0;
+  top: 34.5px;
   overflow: hidden;
+  width: 100vw;
+  padding-left: 20vw;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: padding 0.3s ease-out; 
 }
 .search-wrapper.active {
   max-height: 1500px;
   height: auto;
-  opacity: 1;
-  transition: 0.2s ease;
   background-color: white;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 .search-results {
-  all: unset;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  width: 50vw;
-  list-style: none;
+  gap: 8px;
+  list-style: none; 
+  display: flex;
+  flex-direction: column;
+  max-height: 1000px; /* wystarczająca wysokość na całą listę */
+  height: auto;
+  padding: 0;
+  margin: 0;
 }
-.search-results > li {
-  padding-right: 2px;
-  padding-left: 50px;
-  background-color: rgba(153, 255, 0);
+.search-wrapper.active > .search-results > li > span {
+  font-size: 20px;
+  display: inline-block;          /* wymagane, żeby transform działał */
+  transform-origin: left center;  /* powiększa od lewej strony */
+  transition: transform 0.2s ease;
+}
+.search-wrapper.active > .search-results > li:hover > span,
+.search-wrapper.active > .search-results > li:focus > span
+{
+  transform: scale(1.1);
 }
 @media (max-width: 1110px) {
   /* Styl obowiązuje do 600px włącznie */

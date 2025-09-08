@@ -1,162 +1,168 @@
-// === Scroll na górę (jak u Ciebie) ===
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
-window.addEventListener("load", () => {
-  setTimeout(() => window.scrollTo(0, 0), 10);
-});
-window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
-};
-
-// === Główna inicjalizacja ===
+// === WSPÓLNY KONTROLER MENU + SEARCH + OVERLAY ===
 window.addEventListener("DOMContentLoaded", () => {
-  // 1) Wejście animacji nav
+  // elementy
   const nav = document.querySelector("nav");
   requestAnimationFrame(() => nav && nav.classList.add("visible"));
 
-  // 2) Menu mobilne
-  const toggle = document.querySelector(".menu-small");
-  const panel  = document.querySelector(".menu-small-panel");
+  const menuToggle = document.querySelector(".menu-small");
+  const menuPanel  = document.querySelector(".menu-small-panel");
+  const searchForm = document.querySelector(".search-form");
+  const searchInput = document.querySelector('.search-form input[type="search"]');
+  const searchWrap  = document.querySelector(".search-wrapper");
+  const overlay     = document.querySelector(".overlay");
 
-  // Jeżeli nie ma elementów, nic nie rób (bez błędów w konsoli)
-  if (!toggle || !panel) return;
+  // Jeżeli czegokolwiek kluczowego brakuje — wychodzimy bez błędów
+  if (!menuToggle || !menuPanel || !searchForm || !searchWrap || !overlay) return;
 
-  // ID panelu do aria (jeśli brak)
-  if (!panel.id) panel.id = "menu-small-panel";
-  // A11y
-  toggle.setAttribute("aria-controls", panel.id);
-  toggle.setAttribute("aria-expanded", "false");
-  panel.setAttribute("aria-hidden", "true");
+  // A11y (bezpiecznie, jeśli brak id)
+  if (!menuPanel.id) menuPanel.id = "menu-small-panel";
+  menuToggle.setAttribute("aria-controls", menuPanel.id);
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuPanel.setAttribute("aria-hidden", "true");
+  searchInput?.setAttribute("aria-expanded", "false");
 
-  const supportsPointer = "PointerEvent" in window;
+  // --- STAN ---
+  let menuOpen = false;
+  let searchOpen = false;
 
-  // Fallback na openMenu/closeMenu (gdy masz swoje gdzieś indziej — to je wywoła)
-  const externalOpenMenu  = typeof window.openMenu  === "function" ? window.openMenu  : null;
-  const externalCloseMenu = typeof window.closeMenu === "function" ? window.closeMenu : null;
-  const overlay = document.querySelector(".overlay");
+  const syncClasses = () => {
+    menuPanel.classList.toggle("active", menuOpen);
+    menuToggle.setAttribute("aria-expanded", String(menuOpen));
+    menuPanel.setAttribute("aria-hidden", String(!menuOpen));
 
-  const isOpen = () => panel.classList.contains("active");
+    searchWrap.classList.toggle("active", searchOpen);
+    searchInput?.setAttribute("aria-expanded", String(searchOpen));
 
-  const setOpen = (open) => {
-    panel.classList.toggle("active", open);
-    overlay?.classList.toggle("active", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    panel.setAttribute("aria-hidden", String(!open));
-    // zewnętrzne hooki, jeśli masz
-    if (open) externalOpenMenu?.();
-    else externalCloseMenu?.();
+    const showOverlay = menuOpen || searchOpen;
+    overlay.classList.toggle("active", showOverlay);
   };
 
-  const getTarget = (e) => (e.composedPath ? e.composedPath()[0] : e.target);
-  const isOutside = (el) => {
-    if (!el) return true;
-    // gdyby zniknęły elementy w locie
-    if (!panel || !toggle) return true;
-    return !panel.contains(el) && !toggle.contains(el);
-  };
+  // --- FUNKCJE (mutual exclusive openers) ---
+  const openMenu   = () => { searchOpen = false; searchInput?.blur(); menuOpen = true;  syncClasses(); };
+  const closeMenu  = () => { menuOpen = false; syncClasses(); };
+  const toggleMenu = () => { menuOpen = !menuOpen; syncClasses(); };
 
-  function openClose(e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-    setOpen(!isOpen());
-  }
+  const openSearch  = () => { menuOpen = false; searchOpen = true;  syncClasses(); };
+  const closeSearch = () => { searchOpen = false; searchInput?.blur(); syncClasses(); };
+  const toggleSearch = () => { searchOpen = !searchOpen; if (!searchOpen) searchInput?.blur(); syncClasses(); };
 
-  function closeIfOutside(e) {
-    const t = getTarget(e);
-    if (isOpen() && isOutside(t)) setOpen(false);
-  }
+  // pomocnicze: sprawdzanie, czy klik wewnątrz danego obszaru
+  const within = (root, target) => !!root && (root === target || root.contains(target));
 
-  function onEsc(e) {
-    if (e.key === "Escape" && isOpen()) {
-      setOpen(false);
-      toggle.focus?.();
+  // --- ZDARZENIA ---
+
+  // 1) Menu toggle: jeśli search otwarty → przełącz na menu
+  menuToggle.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (searchOpen) {
+      openMenu(); // switch: search -> menu (overlay zostaje)
+    } else {
+      toggleMenu();
     }
-  }
+  }, { passive: false });
 
-  // --- Listenery na przełączniku ---
-  if (supportsPointer) {
-    // UWAGA: nie dajemy passive:true, bo używamy preventDefault
-    toggle.addEventListener("pointerdown", openClose, { passive: false });
-    // klik w panelu nie zamyka
-    panel.addEventListener("pointerdown", (e) => e.stopPropagation(), { passive: true });
-  } else {
-    toggle.addEventListener("touchstart", openClose, { passive: false });
-    panel.addEventListener("touchstart", (e) => e.stopPropagation(), { passive: true });
-    // rezerwa dla bardzo starych przeglądarek
-    toggle.addEventListener("click", (e) => { e.preventDefault(); openClose(e); }, { passive: false });
-  }
+  // 2) Klik w menuPanel nie „przecieka”
+  menuPanel.addEventListener("pointerdown", (e) => {
+    e.stopPropagation();
+  }, { passive: true });
 
-  // --- Zamknięcie na klik poza (capture, jak u Ciebie) + ESC ---
-  if (supportsPointer) {
-    document.addEventListener("pointerdown", closeIfOutside, { capture: true, passive: true });
-    document.addEventListener("click", (e) => closeIfOutside(e), { capture: true });
-  } else {
-    document.addEventListener("touchstart", closeIfOutside, { capture: true, passive: true });
-    document.addEventListener("click", (e) => closeIfOutside(e), { capture: true });
-  }
-  document.addEventListener("keydown", onEsc, { passive: true });
+  // 3) Search input otwiera search (zamyka menu)
+  searchInput?.addEventListener("focus", () => openSearch());
+  searchInput?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openSearch();
+  });
 
-  // --- Reset na szerokim ekranie (lekko bezpieczniej) ---
+  // 4) Klik w search wrapper nie zamyka nic
+  searchWrap.addEventListener("pointerdown", (e) => {
+    e.stopPropagation();
+  }, { passive: true });
+
+  // 5) Klik w overlay — zamyka wszystko
+  overlay.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    menuOpen = false;
+    searchOpen = false;
+    searchInput?.blur(); // <<< tutaj dodane
+    syncClasses();
+  }, { passive: false });
+
+  // 6) Globalny klik poza — zamyka oba
+  document.addEventListener("pointerdown", (e) => {
+    const t = e.target;
+    const inMenuArea   = within(menuPanel, t) || within(menuToggle, t);
+    const inSearchArea = within(searchWrap, t) || within(searchForm, t);
+
+    if (!inMenuArea && !inSearchArea) {
+      if (menuOpen || searchOpen) {
+        menuOpen = false;
+        searchOpen = false;
+        searchInput?.blur(); // <<< tutaj dodane
+        syncClasses();
+      }
+    }
+  }, { capture: true });
+
+  // 7) ESC zamyka wszystko
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && (menuOpen || searchOpen)) {
+      menuOpen = false;
+      searchOpen = false;
+      searchInput?.blur(); // <<< tutaj dodane
+      syncClasses();
+      menuToggle.focus?.();
+    }
+  }, { passive: true });
+
+  // 8) Resize: powyżej 1110px zamykamy results i menu → overlay też znika
   let resizeRAF = 0;
   const onResize = () => {
     cancelAnimationFrame(resizeRAF);
     resizeRAF = requestAnimationFrame(() => {
-      if (window.innerWidth > 1110 && isOpen()) setOpen(false);
+      if (window.innerWidth > 1110) {
+        if (menuOpen || searchOpen) {
+          menuOpen = false;
+          searchOpen = false;
+          searchInput?.blur(); // <<< tutaj dodane
+          syncClasses();
+        }
+      }
     });
   };
   window.addEventListener("resize", onResize, { passive: true });
-});
 
-// ELEMENTY
-const input = document.querySelector('.search-form input[type="search"]');
-const wrapper = document.querySelector('.search-wrapper');
-
-if (input && wrapper) {
-  const openSearch = () => {
-    wrapper.classList.add('active');
-    input.setAttribute('aria-expanded', 'true');
-  };
-
-  const closeSearch = () => {
-    wrapper.classList.remove('active');
-    input.setAttribute('aria-expanded', 'false');
-  };
-
-  // Otwórz po kliknięciu/fokusie w input
-  input.addEventListener('focus', openSearch);
-  input.addEventListener('click', openSearch);
-
-  // Zamknij kliknięciem poza inputem i wrapperem
-  document.addEventListener('click', (e) => {
-    if (!input.contains(e.target) && !wrapper.contains(e.target)) {
-      closeSearch();
+  // Media query fallback (np. zoom/devtools)
+  const mq = window.matchMedia("(min-width: 1111px)");
+  mq.addEventListener?.("change", (e) => {
+    if (e.matches && (menuOpen || searchOpen)) {
+      menuOpen = false;
+      searchOpen = false;
+      searchInput?.blur(); // <<< tutaj dodane
+      syncClasses();
     }
   });
 
-  // Esc zamyka
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeSearch();
-  });
-
-  // --- NOWE: zamykaj po zmianie rozmiaru okna (debounce) ---
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      closeSearch();
-    }, 150); // lekki debounce, żeby nie spamować podczas przeciągania
-  });
-
-  // Dodatkowo: zmiana orientacji (mobile/tablety)
-  window.addEventListener('orientationchange', closeSearch);
-
-  // Opcjonalnie: jeśli masz breakpoint w CSS (np. max-width: 1110px), to też nasłuchuj:
-  const mql = window.matchMedia('(max-width: 1110px)');
-  if (mql.addEventListener) {
-    mql.addEventListener('change', () => closeSearch());
-  } else if (mql.addListener) {
-    // starsze przeglądarki
-    mql.addListener(() => closeSearch());
+  // startowy sync + ewentualne domknięcie, jeśli start szeroko
+  syncClasses();
+  if (window.innerWidth > 1110) {
+    menuOpen = false;
+    searchOpen = false;
+    searchInput?.blur();
+    syncClasses();
   }
-}
+});
 
+const searchInput = document.querySelector(".search-form input[type='search']");
+
+if (searchInput) {
+  searchInput.addEventListener("focus", () => {
+    import("./search.js")
+      .then(module => {
+        console.log("✅ search.js załadowany");
+        module.initSearch(); // wywoła funkcję z search.js
+      })
+      .catch(err => console.error("Błąd ładowania search.js:", err));
+  });
+}
