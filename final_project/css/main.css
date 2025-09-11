@@ -53,7 +53,7 @@ a:visited {
 .menu-small {
   all: unset;
   display: none;
-  padding: 5px 60px;
+  padding: 5px 30px;
   font-size: 20px;
   margin-left: auto;
   cursor: pointer;
@@ -195,10 +195,12 @@ a:visited {
   transition: transform 0.2s ease;
 }
 .search-wrapper.active > .search-results > li:hover > span,
-.search-wrapper.active > .search-results > li:focus > span
+.search-wrapper.active > .search-results > li:focus > span,
+.search-wrapper.active > .search-results > li.active > span
 {
   transform: scale(1.1);
 }
+
 @media (max-width: 1110px) {
   /* Styl obowiązuje do 600px włącznie */
   .menu-big {
@@ -223,7 +225,7 @@ a:visited {
     align-items: center;
     position: absolute;      /* pozycjonowanie względem nav */
     top: 0;
-    left: 10%;               /* to samo co margin-left w .menu-big */            /* to samo co width w .menu-big */
+    left: 15%;               /* to samo co margin-left w .menu-big */            /* to samo co width w .menu-big */
     height: 100%;
     z-index: 200;            /* nad innymi elementami */
     padding: 5px 0;

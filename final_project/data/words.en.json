@@ -33,7 +33,8 @@
     {"city": "Caracas", "country": "Venezuela"},
     {"city": "Chennai", "country": "India"},
     {"city": "Casablanca", "country": "Morocco"},
-    {"city": "Cleveland", "country": "United States"}
+    {"city": "Cleveland", "country": "United States"},
+    {"city": "Chełm", "country": "Poland"}
   ],
   "D": [
     {"city": "Dubai", "country": "United Arab Emirates"},
