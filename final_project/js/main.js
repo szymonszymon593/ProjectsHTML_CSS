@@ -1,3 +1,4 @@
+
 // === WSPÓLNY KONTROLER MENU + SEARCH + OVERLAY ===
 window.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
@@ -151,3 +152,11 @@ if (searchInput) {
       .catch(err => console.error("Błąd ładowania search.js:", err));
   });
 }
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0);
+});

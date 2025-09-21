@@ -33,10 +33,10 @@
     </ul>
     <div class="small-all">
       <div class="small-default">
-        <a href="#" class="logo-link">
+        <a href="http://127.0.0.1:5500/index.html" class="logo-link">
           <img src="img/logo.png?v=200000000" alt="Logo" class="logo">
         </a>        
-        <form action="" method="GET" class="search-form">
+        <form action="" methaaod="GET" class="search-form">
           <input type="search" name="q" placeholder="type to search" autocomplete="off">
         </form>
         <div class="menu-small">
@@ -58,9 +58,46 @@
     </div>
   </nav>
   <div class="container-main">
+    <div class="hero">
+      <img src="img/hero.jpg" alt="airplane-hero">
+    </div>
+    <div class="signup">
+      <div class="signup-text">
+        Discover the world.
+      </div>
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+<div 
+  id="g_id_onload"
+  data-client_id="TWOJE_CLIENT_ID.apps.googleusercontent.com"
+  data-login_uri="https://twoj-backend.com/auth/google"
+  data-auto_prompt="false">
+</div>
+<div 
+  class="g_id_signin"
+  data-type="standard"
+  data-size="large"
+  data-theme="outline"
+  data-text="sign_in_with"
+  data-shape="rect"
+  data-logo_alignment="left">
+</div>
+<div id="appleid-signin" 
+     data-color="black" 
+     data-border="true" 
+     data-type="sign in">
+</div>
 
-    <img src="img/sydney.jpeg" alt="sydney">
-    <div>deifiwenviwnviurwniunrwviunruvc</div>
+<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+<script>
+  AppleID.auth.init({
+    clientId : "com.twoja.app",
+    scope : "name email",
+    redirectURI: "https://twoja-strona.com/auth/callback",
+    usePopup: true
+  });
+</script>
+
+    </div>
     <div class="scroll"></div>
     <div class="overlay"></div>
   </div>
