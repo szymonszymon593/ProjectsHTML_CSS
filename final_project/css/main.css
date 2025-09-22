@@ -151,13 +151,7 @@ a:visited {
   transform: translateY(0);   /* ← normalnie jest na miejscu */
   opacity: 1;                 /* ← normalnie widoczny */
 }
-body.preload .container-main {
-  transform: translateY(30px);
-  opacity: 0;
-}
-.container-main {
-  transition: transform 0.7s ease, opacity 0.7s ease;
-}
+
 .hero {
   width: 100%;
   height: 50vh;     
@@ -173,7 +167,7 @@ body.preload .container-main {
 .signup {
   font-size: 45px;
   height: 45dvh;
-  padding-top: 6dvh;
+  padding-top: 4dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,9 +175,21 @@ body.preload .container-main {
 }
 .signup-text {
   max-width: 95dvw;
-  border: black 1px solid;
+  padding-bottom: 4%;
 }
-
+.login-btns {
+  border: 1px black solid;
+}
+.login-btns button {
+  background-color: white;
+  color: black;
+  width: 100%;
+}
+.login-btns img {
+  width: 30px;
+  height: 30px;
+  object-fit:cover;
+}
 .visible {
   transform: translateY(0);
 /*   pointer-events: auto; */
@@ -306,5 +312,10 @@ body.preload .container-main {
   }
   .small-all {
     display: flex;
+  }
+}
+@media (max-width: 550px) {
+  .signup {
+    font-size: 30px;
   }
 }

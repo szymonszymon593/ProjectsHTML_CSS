@@ -153,10 +153,108 @@ if (searchInput) {
   });
 }
 
+// helper to load a script only once
+function loadScriptOnce(src, id, callback) {
+  if (document.getElementById(id)) {
+    callback && callback();
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = src;
+  script.id = id;
+  script.async = true;
+  script.defer = true;
+  script.onload = callback;
+  document.head.appendChild(script);
+}
+
+// APPLE LOGIN
+function initApple() {
+  if (window.AppleID && AppleID.auth) {
+    AppleID.auth.init({
+      clientId: "#",           // TODO: replace with your Apple Service ID
+      scope: "name email",
+      redirectURI: "#",        // TODO: your backend endpoint
+      usePopup: true           // open in a popup rather than redirecting
+    });
+  }
+}
+
+// GOOGLE LOGIN → switched to classic OAuth2 popup
+function initGoogle() {
+  // nothing to initialise here, kept as an empty function
+}
+
+function openGoogleOAuth() {
+  const oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+
+  const params = new URLSearchParams({
+    client_id: "#", // TODO: replace with your Google client_id
+    redirect_uri: "#", // TODO: replace with your backend endpoint
+    response_type: "token", // use "code" when you add backend support
+    scope: "openid email profile",
+    include_granted_scopes: "true",
+    prompt: "select_account" // 👈 always forces the account selection screen
+  });
+
+  window.open(
+    `${oauth2Endpoint}?${params.toString()}`,
+    "googleLogin",
+    "width=500,height=600"
+  );
+}
+
+// attach events once the DOM has fully loaded
+window.addEventListener("DOMContentLoaded", () => {
+  const googleBtn = document.getElementById("google-login");
+  const appleBtn = document.getElementById("apple-login");
+
+  if (googleBtn) {
+    // on hover → load the Google script (kept for consistency, not essential here)
+    googleBtn.addEventListener("mouseenter", () => {
+      loadScriptOnce(
+        "https://accounts.google.com/gsi/client",
+        "google-login-script",
+        initGoogle
+      );
+    });
+
+    // on click → open the classic Google OAuth2 popup
+    googleBtn.addEventListener("click", () => {
+      openGoogleOAuth();
+    });
+  }
+
+  if (appleBtn) {
+    // on hover → load the Apple script
+    appleBtn.addEventListener("mouseenter", () => {
+      loadScriptOnce(
+        "https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js",
+        "apple-login-script",
+        initApple
+      );
+    });
+
+    // on click → trigger Apple sign-in
+    appleBtn.addEventListener("click", () => {
+      if (window.AppleID && AppleID.auth) {
+        try {
+          AppleID.auth.signIn();
+        } catch (err) {
+          console.error("Apple sign-in error:", err);
+        }
+      } else {
+        console.warn("Apple script is not yet ready.");
+      }
+    });
+  }
+});
+
+
+// scroll reset
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
-
 window.addEventListener("load", () => {
   window.scrollTo(0, 0);
 });

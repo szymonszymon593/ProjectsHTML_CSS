@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discover the world</title>
-
   <!-- favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon_world/apple-touch-icon.png?v=120">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon_world/favicon-32x32.png?v=120">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon_world/favicon-16x16.png?v=120">
-  <link rel="manifest" href="favicon_world/site.webmanifest?v=120">
-  <link rel="shortcut icon" href="favicon_world/favicon.ico?v=120" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon_world/apple-touch-icon.png?v=1200000">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon_world/favicon-32x32.png?v=1200000">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon_world/favicon-16x16.png?v=1200000">
+  <link rel="manifest" href="favicon_world/site.webmanifest?v=1200000">
+  <link rel="shortcut icon" href="favicon_world/favicon.ico?v=1200000" type="image/x-icon">
   <!-- fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,40 +62,18 @@
     </div>
     <div class="signup">
       <div class="signup-text">
-        Discover the world.
+        Your journey starts here.
       </div>
-      <script src="https://accounts.google.com/gsi/client" async defer></script>
-<div 
-  id="g_id_onload"
-  data-client_id="TWOJE_CLIENT_ID.apps.googleusercontent.com"
-  data-login_uri="https://twoj-backend.com/auth/google"
-  data-auto_prompt="false">
-</div>
-<div 
-  class="g_id_signin"
-  data-type="standard"
-  data-size="large"
-  data-theme="outline"
-  data-text="sign_in_with"
-  data-shape="rect"
-  data-logo_alignment="left">
-</div>
-<div id="appleid-signin" 
-     data-color="black" 
-     data-border="true" 
-     data-type="sign in">
-</div>
-
-<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
-<script>
-  AppleID.auth.init({
-    clientId : "com.twoja.app",
-    scope : "name email",
-    redirectURI: "https://twoja-strona.com/auth/callback",
-    usePopup: true
-  });
-</script>
-
+      <div class="login-btns">
+        <button id="google-login" class="btn google">
+          <img src="img/google.svg" alt="google-login">
+          <span>Continue with Google</span>
+        </button>
+        <button id="apple-login" class="btn apple">
+          <img src="img/apple.svg" alt="apple-login">
+          <span>Continue with Apple</span>
+        </button>
+      </div>      
     </div>
     <div class="scroll"></div>
     <div class="overlay"></div>
