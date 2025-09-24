@@ -1,4 +1,3 @@
-
 // === WSPÓLNY KONTROLER MENU + SEARCH + OVERLAY ===
 window.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("nav");
@@ -197,9 +196,12 @@ function openGoogleOAuth() {
     prompt: "select_account" // 👈 always forces the account selection screen
   });
 
+  // 🔥 unikalna nazwa popupu za każdym kliknięciem
+  const popupName = "googleLogin_" + Date.now();
+
   window.open(
     `${oauth2Endpoint}?${params.toString()}`,
-    "googleLogin",
+    popupName,
     "width=500,height=600"
   );
 }
@@ -257,4 +259,42 @@ if ("scrollRestoration" in history) {
 }
 window.addEventListener("load", () => {
   window.scrollTo(0, 0);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const signup = document.querySelector(".signup");
+  let animated = false; // żeby animacja była tylko raz
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+            signup.classList.add("show");
+            observer.unobserve(signup);
+            animated = true;
+          }
+        });
+      },
+      { threshold: 0.4 } // ← zmienione z 0.9 na 0.4
+    );
+    observer.observe(signup);
+  } else {
+    // fallback dla starych Safari
+    const onScroll = () => {
+      if (animated) return;
+      const rect = signup.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // sprawdzamy czy co najmniej 40% elementu jest widoczne
+      if (rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.4) {
+        signup.classList.add("show");
+        animated = true;
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+  }
 });

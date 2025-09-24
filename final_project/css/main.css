@@ -167,28 +167,69 @@ a:visited {
 .signup {
   font-size: 45px;
   height: 45dvh;
-  padding-top: 4dvh;
+  padding-top: 6dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: green solid 1px;
+  opacity: 0;
+  -webkit-transform: translateY(100px);
+  -ms-transform: translateY(100px);
+  transform: translateY(100px);
+
+  -webkit-transition: all 0.7s ease-out;
+  -moz-transition: all 0.7s ease-out;
+  -o-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+}
+.signup.show {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
 }
 .signup-text {
-  max-width: 95dvw;
-  padding-bottom: 4%;
+  max-width: 99dvw;
+  padding-bottom: 6dvh;
 }
 .login-btns {
-  border: 1px black solid;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 30vw;
 }
 .login-btns button {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 8px;
+  display: flex;
+  gap: 3vw;
   background-color: white;
   color: black;
   width: 100%;
+  padding: 5px;
+  border: 1px solid black;
+}
+.login-btns button:hover,
+.login-btns button:focus {
+  border: 1px solid rgba(153, 255, 0, 0.8);
 }
 .login-btns img {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 45px;
+  margin: 5px;
+  margin-left: 10px;
   object-fit:cover;
+}
+.login-btns span {
+  margin: 5px;
+  flex-grow: 1;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 }
 .visible {
   transform: translateY(0);
@@ -313,9 +354,34 @@ a:visited {
   .small-all {
     display: flex;
   }
+  .login-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 50vw;
+  }
+  .login-btns span {
+    margin: 2px;
+    font-size: 15px;
+  }
 }
 @media (max-width: 550px) {
   .signup {
     font-size: 30px;
+  }
+  .login-btns img {
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+    margin-left: 10px;
+  }
+  .login-btns span {
+    margin: 2px;
+    font-size: 15px;
+  }
+  .login-btns {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
   }
 }
