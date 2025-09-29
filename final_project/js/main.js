@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.4 } // ← zmienione z 0.9 na 0.4
+      { threshold: 0.4 } 
     );
     observer.observe(signup);
   } else {
@@ -298,3 +298,30 @@ document.addEventListener("DOMContentLoaded", () => {
     onScroll();
   }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const continents = document.querySelectorAll(".continent");
+  const footer = document.querySelector("footer");
+  const lastContinent = continents[continents.length - 1];
+
+  const observer = new IntersectionObserver((entries) => {
+    // Sortujemy od lewej do prawej wg pozycji X
+    const visible = entries
+      .filter(entry => entry.isIntersecting && entry.intersectionRatio >= 0.4)
+      .sort((a, b) => a.target.getBoundingClientRect().left - b.target.getBoundingClientRect().left);
+
+    visible.forEach((entry, i) => {
+      setTimeout(() => {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); // tylko raz
+
+        // sprawdzamy, czy to ostatni kontynent
+        if (entry.target === lastContinent) {
+          footer.classList.add("show");
+        }
+      }, i * 200); // opóźnienie pomiędzy kolejnymi
+    });
+  }, { threshold: [0, 0.4] });
+
+  continents.forEach(continent => observer.observe(continent));
+});
+
